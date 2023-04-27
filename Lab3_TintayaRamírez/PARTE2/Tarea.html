@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casa de cambio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        .form {
+            background-color: #f1f1f1;
+            border-radius: 10px;
+            padding: 20px;
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .form input[type="radio"], .form input[type="text"], .form input[type="button"] {
+            margin: 5px;
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+        }
+        
+        .form input[type="button"] {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        
+        .form input[type="button"]:hover {
+            background-color: #3e8e41;
+        }
+        
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Casa de cambio</h2>
+        <div class="form">
+            <p>Seleccionar moneda a enviar:</p>
+            <input type="radio" name="monedaOrigen" value="Dolar" id="Dolar"><label for="Dolar">Dólar</label>
+            <input type="radio" name="monedaOrigen" value="Euro" id="Euro"><label for="Euro">Euro</label>
+            <input type="radio" name="monedaOrigen" value="Sol" id="Sol"><label for="Sol">Sol</label>
+
+            <p>Ingresar monto:</p>
+            <input type="text" name="monto" id="monto">
+
+            <p>Seleccionar a qué moneda se va a convertir:</p>
+            <input type="radio" name="monedaDestino" value="Dolar" id="Dolar2"><label for="Dolar2">Dólar</label>
+            <input type="radio" name="monedaDestino" value="Euro" id="Euro2"><label for="Euro2">Euro</label>
+            <input type="radio" name="monedaDestino" value="Sol" id="Sol2"><label for="Sol2">Sol</label>
+
+            <input type="button" value="Convertir" onclick="convertir()">
+        </div>
+        <div class="result">
+            <p>Resultado:</p>
+            <p id="resultado"></p>
+        </div>
+    </div>
+
+    <script>
+        function convertir(){
+            var monto = parseFloat(document.getElementById("monto").value);
+            var moneda = document.querySelector('input[name="monedaOrigen"]:checked').value;
+            var moneda2 = document.querySelector('input[name="monedaDestino"]:checked').value;
+            var resultado = 0;
+
+            if(moneda == "Dolar" && moneda2 == "Euro"){
+                resultado = monto * 0.85;
+            }else if(moneda == "Dolar" && moneda2 == "Sol"){
+                resultado = monto * 3.96;
+            }else if(moneda == "Euro" && moneda2 == "Dolar"){
+                resultado = monto * 1.18;
+            }else if(moneda == "Euro" && moneda2 == "Sol"){
+                resultado = monto * 4.65;
+            }else if(moneda == "Sol" && moneda2 == "Dolar"){
+                resultado = monto * 0.25;
+            }else if(moneda == "Sol" && moneda2 == "Euro"){
+                resultado = monto * 0.22;
+            }
+
+            document.getElementById("resultado").innerHTML = resultado;
+        }
+    </script>
+</body>
+</html>
